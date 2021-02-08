@@ -4,9 +4,19 @@ const config = require("./config");
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({
+    limit: "10mb"
+}));
 
 mongoose.connect(config.connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Habilita o CORS
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, x-access-token');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    next();
+});
 
 //Load routes
 const indexRoute = require("./routes/index-route");

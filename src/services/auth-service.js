@@ -30,3 +30,12 @@ exports.authorize = (req, res, next) => {
         });
     }
 }
+
+exports.getUserData = (req) => {
+    const token =
+        req.body.token ||
+        req.query.token ||
+        req.headers["x-access-token"];
+
+    return this.decodeToken(token);
+}

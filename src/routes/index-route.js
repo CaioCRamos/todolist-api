@@ -3,8 +3,9 @@ const router = express.Router();
 
 router.get("/", (req, res, next) => {
     res.status(200).send({
-        title: "Node Study API",
-        version: "0.0.2"
+        title: "TODO List API",
+        description: "Study Node.JS API",
+        version: "1.0.0"
     });
 });
 
