@@ -1,6 +1,6 @@
 const app = require("../src/app");
 const http = require('http');
-const debug = require('debug')('balta:server');
+const debug = require('debug')('todolist-api:server');
 
 const port = normalizePort(process.env.PORT || '3000');
 app.set("port", port);

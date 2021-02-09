@@ -2,8 +2,8 @@ const repository = require("../repositories/user-repository");
 const md5 = require("md5");
 const authService = require("../services/auth-service");
 
-exports.authenticate = async(req, res) => {
-    try{
+exports.authenticate = async (req, res) => {
+    try {
         const { email, password } = req.body;
         const user = await repository.getByEmailAndPassword({
             email: email,
@@ -24,14 +24,12 @@ exports.authenticate = async(req, res) => {
         });
 
         res.status(200).json({
-            user: {
-                email: user.email,
-                nome: user.name
-            },
+            email: user.email,
+            name: user.name,
             token: token
         });
 
-    }catch(error){
+    } catch (error) {
         res.status(500).send({
             message: "Your request has failed",
             data: error.message
@@ -39,11 +37,11 @@ exports.authenticate = async(req, res) => {
     }
 }
 
-exports.create = async(req, res) => {
-    try{
+exports.create = async (req, res) => {
+    try {
         const { name, email, password } = req.body;
         await repository.create({
-            name: name, 
+            name: name,
             email: email,
             password: md5(password + global.SALT_KEY)
         });
@@ -51,7 +49,7 @@ exports.create = async(req, res) => {
         res.status(201).json({
             message: "New user created"
         });
-    }catch(error){
+    } catch (error) {
         res.status(500).json({
             message: "Your request has failed",
             data: error.message
