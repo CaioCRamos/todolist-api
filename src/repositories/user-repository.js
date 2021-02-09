@@ -10,7 +10,7 @@ exports.create = async(data) => {
 }
 
 exports.getByEmailAndPassword = async(data) => {
-    return User.findOne({
+    return await User.findOne({
         email: data.email, 
         password: data.password
     });
